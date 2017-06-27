@@ -1,5 +1,8 @@
 {
 	"devDependencies": {
 		"lerna": "^2.0.0-rc.5"
+	},
+	"scripts": {
+		"start" : "./scripts/cleanup.sh && ./scripts/startFabric.sh && ./scripts/startTheEngines.sh"
 	}
 }
