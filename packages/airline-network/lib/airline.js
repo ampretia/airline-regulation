@@ -59,7 +59,13 @@ function onReplacePart(replacePart) {
             return getAssetRegistry('org.team3.airline.Plane');
         })
         .then(function(ar) {
-            
+            var parts = plane.parts.filter(function(p) {
+                return p.getIdentifier() !== part.getIdentifier();
+            });
+            parts.push(newPart);
+            plane.parts = parts;
+
+            return ar.update(plane);
         });
 }
 
