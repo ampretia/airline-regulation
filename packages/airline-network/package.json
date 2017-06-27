@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "The art of the airline-regulation",
   "scripts": {
-    "buildBNA": "mkdirp ../../dist && composer archive create --sourceType dir --sourceName . -a ./dist/airline-regulation-network.bna",
+    "buildBNA": "mkdirp ../../dist && composer archive create --sourceType dir --sourceName . -a ../../dist/airline-regulation-network.bna",
     "updateArchive" : "composer network update -p hlfv1 -i admin -s adminpw -a ./dist/sample-network.bna",
     "test": "mocha --recursive"
   },
