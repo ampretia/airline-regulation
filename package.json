@@ -1,8 +1,12 @@
 {
-	"devDependencies": {
-		"lerna": "^2.0.0-rc.5"
-	},
-	"scripts": {
-		"start" : "./scripts/cleanup.sh && ./scripts/startFabric.sh && ./scripts/startTheEngines.sh"
-	}
+  "devDependencies": {
+    "lerna": "^2.0.0-rc.5"
+  },
+  "scripts": {
+    "build": "npm run --prefix packages/airline-network buildBNA && composer network deploy -p hlfv1 -i peeradmin -s hh -a ./dist/airline-network.bna",
+    "start": "./scripts/cleanup.sh && ./scripts/startFabric.sh && ./scripts/startTheEngines.sh"
+  },
+  "dependencies": {
+    "composer-rest-server": "^0.8.1"
+  }
 }
