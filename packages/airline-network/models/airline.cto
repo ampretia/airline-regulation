@@ -1,0 +1,45 @@
+namespace org.team3.airline
+
+enum ServiceType {
+  o INSPECT
+  o REPLACE
+  o DESTROY
+  o CREATE
+}
+
+enum PartType {
+  o INTERIOR_NON_CRITICAL
+  o ELECTRONICS
+  o FLIGHT_GUIDANCE
+  o ENGINE
+  o FLAPS
+  o FUSELAGE
+  o WINGS
+  o LANDING_GEAR
+  o TAIL
+}
+
+asset Plane identified by nNumber {
+  o String nNumber
+  o Part[] parts
+}
+
+asset Part identified by partNumber {
+  o String partNumber
+  o Integer condition default=10 range=[0, 10]
+  o PartType type
+  --> ServiceLog[] serviceHistroy
+}
+
+asset ServiceLog identified by logId {
+  o String logId
+  o ServiceType type
+}
+
+participant Mechanic identified by faaMechanicId {
+  o String faaMechanicId
+}
+  
+participant Regulator identified by regulatorId {
+  o String regulatorId
+}

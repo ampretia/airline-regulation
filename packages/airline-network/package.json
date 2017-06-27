@@ -1,0 +1,23 @@
+{
+  "name": "airline-network",
+  "version": "0.0.1",
+  "description": "The art of the airline-regulation",
+  "scripts": {
+    "buildBNA": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/airline-regulation-network.bna",
+    "updateArchive" : "composer network update -p hlfv1 -i admin -s adminpw -a ./dist/sample-network.bna",
+    "test": "mocha --recursive"
+  },
+  "author": "Hyperledger Composer",
+  "license": "Apache-2",
+  "devDependencies": {
+    "browserfs": "latest",
+    "chai": "latest",
+    "composer-admin": "unstable",
+    "composer-client": "unstable",
+    "composer-connector-embedded": "unstable",
+    "eslint": "latest",
+    "istanbul": "latest",
+    "mkdirp": "^0.5.1",
+    "mocha": "latest"
+  }
+}
