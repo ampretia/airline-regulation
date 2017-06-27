@@ -30,7 +30,7 @@ asset Part identified by partNumber {
   o Integer condition default=10 range=[0, 10]
   o PartType type
   --> Plane plane optional
-  o ServiceLog[] serviceHistroy
+  o ServiceLog[] serviceHistroy optional
 }
 
 concept ServiceLog {
