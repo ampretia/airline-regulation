@@ -3,8 +3,7 @@ namespace org.team3.airline
 
 enum ServiceType {
   o INSPECT
-  o REPLACED
-  o REPLACEMENT
+  o REPLACE
   o DESTROY
   o CREATE
 }
@@ -31,14 +30,11 @@ asset Part identified by partNumber {
   o Integer condition default=10 range=[0, 10]
   o PartType type
   --> ServiceLog[] serviceHistroy optional
-  --> Plane plane optional
 }
 
 asset ServiceLog identified by logId {
   o String logId
   o ServiceType type
-  --> Mechanic mechanic
-  --> Part extraPart optional
 }
 
 participant Mechanic identified by faaMechanicId {
@@ -53,6 +49,10 @@ participant Regulator identified by regulatorId {
 abstract transaction PartTransaction {
   --> Part part
   --> Mechanic mechanic
+}
+ 
+transaction AddPartToPlane extends PartTransaction {
+  --> Plane plane
 }
 
 transaction InspectPart extends PartTransaction{
