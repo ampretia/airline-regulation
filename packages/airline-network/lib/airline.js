@@ -1,5 +1,18 @@
 'use strict';
 
+function onAddPartToPlane(addPartToPlane) {
+    if (!addPartToPlane.plane.parts) {
+        addPartToPlane.plane.parts = [];
+    }
+
+    addPartToPlane.plane.parts.push(addPartToPlane.part);
+
+    return getAssetRegistry('org.team3.airline.plane')
+        .then(function(ar) {
+            return ar.update(addPartToPlane.plane);
+        });
+}
+
 function onInspectPart(inspectPart) {
 
     var factory = getFactory();
@@ -29,24 +42,25 @@ function onReplacePart(replacePart) {
     var newPart = inspectPart.newPart;
     var plane = part.plane;
 
-    var partAr
+    var partAr;
 
     return getAssetRegistry('org.team3.airline.Part')
         .then(function(ar) {
             partAr = ar;
-            var serviceLog = factory.newResource('org.team3.airline', 'ServiceLog');
+            var serviceLog = factory.newConcept('org.team3.airline', 'ServiceLog');
             serviceLog.type = 'REPLACED';
 
             if (!part.serviceHistory) {
                 part.serviceHistory = [];
             }
 
+            part.plane = null;
             part.serviceHistory.push(serviceLog);
 
             return ar.update(part);
         })
         .then(function() {
-            var serviceLog = factory.newResource('org.team3.airline', 'ServiceLog');
+            var serviceLog = factory.newConcept('org.team3.airline', 'ServiceLog');
             serviceLog.type = 'REPLACEMENT';
 
             if (!newPart.serviceHistory) {

@@ -22,17 +22,18 @@ enum PartType {
 
 asset Plane identified by nNumber {
   o String nNumber
-  o Part[] parts optional
+  --> Part[] parts optional
 }
 
 asset Part identified by partNumber {
   o String partNumber
   o Integer condition default=10 range=[0, 10]
   o PartType type
-  --> ServiceLog[] serviceHistroy optional
+  --> Plane plane optional
+  o ServiceLog[] serviceHistroy optional
 }
 
-asset ServiceLog identified by logId {
+concept ServiceLog {
   o String logId
   o ServiceType type
 }
