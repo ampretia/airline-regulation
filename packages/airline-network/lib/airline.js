@@ -9,9 +9,10 @@ function onSetupDemo() {
     ];
 
     var part = factory.newResource('org.team3.airline', 'Part', 'PART_1');
+    part.type = "ENGINE"
 
     var mechanic = factory.newResource('org.team3.airline', 'Mechanic', 'MECHANIC_1');
-    mechanic.certifications = ['INSPECT'];
+    mechanic.certifications = ['ENGINE'];
 
     return getParticipantRegistry('org.team3.airline.Mechanic')
         .then(function(pr) {
@@ -24,7 +25,7 @@ function onSetupDemo() {
             return ar.add(part);
         })
         .then(function() {
-            getAssetRegistry('org.team3.airline.Plane'); 
+            return getAssetRegistry('org.team3.airline.Plane'); 
         })
         .then(function(ar) {
             return ar.add(plane);
