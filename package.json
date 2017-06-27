@@ -3,10 +3,12 @@
     "lerna": "^2.0.0-rc.5"
   },
   "scripts": {
-    "build": "npm run --prefix packages/airline-network buildBNA && composer network deploy -p hlfv1 -i peeradmin -s hh -a ./dist/airline-network.bna",
-    "start": "./scripts/cleanup.sh && ./scripts/startFabric.sh && ./scripts/startTheEngines.sh"
+    "build": "npm run --prefix packages/airline-network buildBNA && composer network deploy -p hlfv1 -i peeradmin -s hh -a ./dist/airline-regulation-network.bna",
+    "postinstall": "./scripts/cleanup.sh && ./scripts/startFabric.sh",
+    "start" :"./scripts/startTheEngines.sh"
   },
   "dependencies": {
-    "composer-rest-server": "^0.8.1"
+    "composer-cli": "^0.9.0-20170627102828",
+    "composer-rest-server": "^0.9.0-20170627102828"
   }
 }
