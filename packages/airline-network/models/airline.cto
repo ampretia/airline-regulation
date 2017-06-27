@@ -30,12 +30,13 @@ asset Part identified by partNumber {
   o Integer condition default=10 range=[0, 10]
   o PartType type
   --> Plane plane optional
-  o ServiceLog[] serviceHistroy optional
+  o ServiceLog[] serviceHistroy
 }
 
 concept ServiceLog {
   o String logId
   o ServiceType type
+  --> Mechanic machanic
 }
 
 participant Mechanic identified by faaMechanicId {
@@ -67,6 +68,8 @@ transaction ReplacePart extends PartTransaction {
 transaction DestroyPart extends PartTransaction {}
   
 transaction CreatePart extends PartTransaction {}
+
+transaction SetupDemo {}
   
   
   

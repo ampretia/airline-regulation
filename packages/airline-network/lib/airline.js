@@ -1,5 +1,36 @@
 'use strict';
 
+function onSetupDemo() {
+    var factory = getFactory();
+
+    var plane = factory.newResource('org.team3.airline', 'Plane', 'PLANE_1');
+    plane.parts = [
+        factory.newRelationship('org.team3.airline', 'Part', 'PART_1')
+    ];
+
+    var part = factory.newResource('org.team3.airline', 'Part', 'PART_1');
+
+    var mechanic = factory.newResource('org.team3.airline', 'Mechanic', 'MECHANIC_1');
+    mechanic.certifications = ['INSPECT'];
+
+    return getParticipantRegistry('org.team3.airline.Mechanic')
+        .then(function(pr) {
+            return pr.add(mechanic);
+        })
+        .then(function() {
+            return getAssetRegistry('org.team3.airline.Part')
+        })
+        .then(function(ar) {
+            return ar.add(part);
+        })
+        .then(function() {
+            getAssetRegistry('org.team3.airline.Plane'); 
+        })
+        .then(function(ar) {
+            return ar.add(plane);
+        })
+}
+
 function onAddPartToPlane(addPartToPlane) {
     if (!addPartToPlane.plane.parts) {
         addPartToPlane.plane.parts = [];
@@ -7,7 +38,7 @@ function onAddPartToPlane(addPartToPlane) {
 
     addPartToPlane.plane.parts.push(addPartToPlane.part);
 
-    return getAssetRegistry('org.team3.airline.plane')
+    return getAssetRegistry('org.team3.airline.Plane')
         .then(function(ar) {
             return ar.update(addPartToPlane.plane);
         });
@@ -22,8 +53,9 @@ function onInspectPart(inspectPart) {
 
     return getAssetRegistry('org.team3.airline.Part')
         .then(function(ar) {
-            var serviceLog = factory.newResource('org.team3.airline', 'ServiceLog');
-            serviceLog.type = inspectPart.serviceType;
+            var serviceLog = factory.newConcept('org.team3.airline', 'ServiceLog');
+            serviceLog.type = 'INSPECT';
+            serviceLog.mechanic = getCurrentParticipant();
 
             if (!part.serviceHistory) {
                 part.serviceHistory = [];
