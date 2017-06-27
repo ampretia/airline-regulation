@@ -3,9 +3,9 @@
     "lerna": "^2.0.0-rc.5"
   },
   "scripts": {
-    "build": "npm run --prefix packages/airline-network buildBNA && composer network deploy -p hlfv1 -i peeradmin -s hh -a ./dist/airline-regulation-network.bna",
-    "postinstall": "./scripts/cleanup.sh && ./scripts/startFabric.sh",
-    "start" :"./scripts/startTheEngines.sh"
+    "build": "npm run --prefix packages/airline-network buildBNA && composer network deploy -p hlfv1 -i PeerAdmin -s hh -a ./dist/airline-regulation-network.bna",
+    "postinstall": "./scripts/startFabric.sh",
+    "start" :"npm run build && ./scripts/startTheEngines.sh"
   },
   "dependencies": {
     "composer-cli": "^0.9.0-20170627102828",
