@@ -31,6 +31,7 @@ asset Part identified by partNumber {
   o Integer condition default=10 range=[0, 10]
   o PartType type
   --> ServiceLog[] serviceHistroy optional
+  --> Plane plane optional
 }
 
 asset ServiceLog identified by logId {
@@ -52,7 +53,6 @@ participant Regulator identified by regulatorId {
 abstract transaction PartTransaction {
   --> Part part
   --> Mechanic mechanic
-  o ServiceType serviceType
 }
 
 transaction InspectPart extends PartTransaction{
